@@ -23,3 +23,33 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-dontnote okhttp3.internal.platform.*
+-dontnote com.google.gson.internal.UnsafeAllocator
+-dontnote org.apache.http.params.*
+-dontnote org.apache.http.conn.*
+-dontnote org.apache.http.conn.scheme.*
+-dontnote android.net.http.*
+
+
+-dontwarn retrofit2.*
+-dontwarn retrofit2.converter.gson.package-info
+
+-dontwarn okhttp3.*
+-dontwarn okhttp3.internal.cache.*
+#-dontwarn okhttp3.internal.cache.DiskLruCache
+#-dontwarn okhttp3.internal.cache.DiskLruCache$Snapshot
+-dontwarn okhttp3.internal.connection.RealConnection
+-dontwarn okhttp3.internal.http.RealResponseBody
+-dontwarn okhttp3.internal.platform.*
+-dontwarn okhttp3.internal.ws.RealWebSocket
+-dontwarn okhttp3.internal.Util
+
+-dontwarn okio.*
+
+-keep class retrofit2.** {*;}
+-keep class okhttp3.** {*;}
+-keep class okio.** {*;}
+
+-keep class com.google.gson.** {*;}
+#-keepattributes Signature
