@@ -12,17 +12,42 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        release {
+            try {
+                keyAlias 'huangxin'
+                keyPassword KEY_PASSWORD
+                storeFile file('/Users/huangxin/workspace/codes/mykeystore/huangxin.keystore')
+                storePassword KEY_PASSWORD
+            } catch (e) {
+                throw new ExceptionInInitializerError("you must define KEY_PASSWORD in gradle.properties")
+            }
+        }
+        debug {
+            try {
+                keyAlias 'huangxin'
+                keyPassword KEY_PASSWORD
+                storeFile file('/Users/huangxin/workspace/codes/mykeystore/huangxin.keystore')
+                storePassword KEY_PASSWORD
+            } catch (e) {
+                throw new ExceptionInInitializerError("you must define KEY_PASSWORD in gradle.properties")
+            }
+        }
+    }
 
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
         }
     }
+
 }
 
 dependencies {
