@@ -48,6 +48,56 @@ android {
         }
     }
 
+    //flavorDimensions('dimen1', 'dimen2')
+
+    productFlavors {
+        Official {
+            //dimension 'dimen1'
+            applicationId "com.huangxin.retrofitdemo"
+            //manifestPlaceholders = [CHANNEL_ID: 0000]
+        }
+        GooglePlay {
+            //dimension 'dimen2'
+            //change application package name,  not Class package name
+            applicationId 'demo.package.change'
+            //manifestPlaceholders = [CHANNEL_ID: 0001]
+        }
+
+//        free {
+//            dimension 'dimen2'
+//        }
+//        charge {
+//            dimension 'dimen2'
+//        }
+    }
+
+    android.applicationVariants.all {variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                def buildType = variant.buildType.name
+                println outputFile.name
+                def fileName = "RetrofitDemo_${variant.productFlavors[0].name}-v${defaultConfig.versionName}-${getCurrentTime()}-${buildType}.apk"
+                output.outputFile = new File(outputFile.parent, fileName)
+            }
+        }
+
+    }
+
+}
+
+def getCurrentTime() {
+    return new Date(System.currentTimeMillis()).format("yyyyMMdd");
+}
+
+
+task printAllVariantName() {
+    doLast {
+        android.applicationVariants.all {
+            variant ->
+                println variant.name
+        }
+    }
 }
 
 dependencies {
